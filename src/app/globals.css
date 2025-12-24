@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f0f0f0;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  main {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    display: block !important;
+  }
+
+  /* Kill any fixed/absolute positioned elements */
+  button[class*="fixed"] {
+    display: none !important;
+    position: static !important;
+  }
+
+  /* Override Tailwind min-h-screen */
+  .min-h-screen {
+    min-height: 0 !important;
+  }
+
+  .print-area {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .gift-card {
+    box-shadow: none !important;
+    margin: 0 auto !important;
+  }
+
+  @page {
+    size: portrait;
+    margin: 0.5in;
+  }
+}
+
+/* Ensure images load for external domains */
+img {
+  max-width: 100%;
+  height: auto;
 }
